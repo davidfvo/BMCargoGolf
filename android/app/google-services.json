@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "583912816202",
+    "project_id": "bmcargogolf",
+    "storage_bucket": "bmcargogolf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:583912816202:android:e3b49e3860de6853d8f0b3",
+        "android_client_info": {
+          "package_name": "com.bmcargogolf"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "583912816202-7u48etrrkf44pm66idhj64f1cnitpi4c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBynZXew6el8TB335qnPf_oHEtfteKfLKg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "583912816202-7u48etrrkf44pm66idhj64f1cnitpi4c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
