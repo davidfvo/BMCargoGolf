@@ -1,14 +1,12 @@
 import React, { FunctionComponent } from 'react';
-import { StyleProp, StyleSheet, TouchableOpacity, TouchableOpacityProps, View, ViewStyle } from 'react-native';
+import { StyleProp, StyleSheet, TouchableOpacity, TouchableOpacityProps, ViewStyle } from 'react-native';
 import { COLORS, FONTS, METRICS } from '../../themes';
-import Colors from '../../themes/Colors';
-import Loading from '../loading/Loading';
-import Separator from '../separator/Separator';
+import { horizontalScale } from '../../utils/StyleHelpers';
 import CheckRender from '../security/CheckRender';
-import { horizontalScale, viewportWidth } from '../../utils/StyleHelpers';
+import Separator from '../separator/Separator';
 import Text from '../text/Text';
 
-const Button: FunctionComponent<propTypes> = (props) => {
+const ButtonText: FunctionComponent<propTypes> = (props) => {
   const localPress = () => {
     if (props.isLoading || props.disabled) {
       return () => { }
@@ -24,32 +22,10 @@ const Button: FunctionComponent<propTypes> = (props) => {
   }
 
   const theme: themeProps = {
-    primary: {
-      backgroundColor: COLORS.primary,
-      loader: COLORS.white,
-      icon: COLORS.white,
-      shadowColor: COLORS.primary,
-      textColor: COLORS.white,
-    },
     secondary: {
-      backgroundColor: COLORS.secondary,
-      loader: COLORS.white,
-      icon: COLORS.white,
-      shadowColor: COLORS.secondary,
-      textColor: COLORS.white,
-    },
-    plain: {
-      backgroundColor: 'transparent',
-      loader: COLORS.white,
-      icon: COLORS.white,
-      shadowColor: 'transparent',
-      textColor: COLORS.white,
+      textColor: COLORS.secondary
     },
     grayPlain: {
-      backgroundColor: 'transparent',
-      loader: COLORS.gray,
-      icon: COLORS.gray,
-      shadowColor: 'transparent',
       textColor: COLORS.gray
     },
   }
@@ -63,26 +39,7 @@ const Button: FunctionComponent<propTypes> = (props) => {
         style={[Styles.buttonContainer, props.containerStyle, { marginHorizontal: props.widthSeparator }]}
         disabled={props.disabled || props.isLoading}
       >
-        <View
-          style={[
-            Styles.buttonContent,
-            theme[props.theme || 'primary'],
-            props.contentStyle,
-          ]}>
-          <CheckRender allowed={props.isLoading}>
-            <Loading
-              size="small"
-              color={Colors.white}
-              style={Styles.loading}
-            />
-          </CheckRender>
-          <CheckRender allowed={!props.isLoading}>
-            <Text style={[Styles.title, { color: theme[props.theme || 'primary'].textColor }]}>{props.title}</Text>
-            <CheckRender allowed={!!props.children}>
-              {props.children}
-            </CheckRender>
-          </CheckRender>
-        </View>
+        <Text style={[Styles.title, { color: theme[props.theme || 'primary'].textColor }]}>{props.title}</Text>
       </TouchableOpacity>
       <CheckRender allowed={props.bottomSeparate}>
         <Separator />
@@ -96,27 +53,24 @@ interface propTypes {
   onPress?: any;
   title: string;
   widthSeparator?: number;
-  buttonHeight?: number;
   activeOpacity?: number;
   touchableProps?: TouchableOpacityProps;
-  contentStyle?: StyleProp<ViewStyle>;
   containerStyle?: StyleProp<ViewStyle>;
   disabled?: boolean;
   bottomSeparate?: boolean;
-  theme?: "primary" | "secondary" | "grayPlain" | "plain";
+  theme?: "grayPlain" | "secondary";
   children?: JSX.Element | JSX.Element[] | undefined;
 }
 
-Button.defaultProps = {
+ButtonText.defaultProps = {
   isLoading: false,
   onPress: () => { },
   title: 'Crear o Consultar',
   widthSeparator: horizontalScale(METRICS.large15),
-  buttonHeight: 64,
   activeOpacity: 0.2,
   children: undefined,
   bottomSeparate: true,
-  theme: 'primary'
+  theme: 'secondary'
 }
 
 const Styles = StyleSheet.create({
@@ -138,11 +92,11 @@ const Styles = StyleSheet.create({
     },
   },
   title: {
-    fontSize: FONTS.regular,
+    fontSize: FONTS.medium,
   },
   loading: {
     padding: METRICS.small5,
   },
 });
 
-export default React.memo(Button)
+export default React.memo(ButtonText)

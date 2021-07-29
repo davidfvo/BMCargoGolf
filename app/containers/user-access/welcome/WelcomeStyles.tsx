@@ -16,11 +16,12 @@ const Styles = StyleSheet.create({
     fontSize: moderateScale(40),
     textAlign: 'center',
     color: COLORS.white,
+    fontWeight: 'bold',
   },
   section: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
   },
 });
 

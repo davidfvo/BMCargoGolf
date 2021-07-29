@@ -9,9 +9,23 @@ import CustomLoading from '../loading/Loading';
 import CheckRender from '../security/CheckRender';
 import CustomSeparator from '../separator/Separator';
 import Text from '../text/Text';
+import TextInputMask from 'react-native-text-input-mask';
 
-const Input: FunctionComponent<propTypes> = props => {
+const InputMasked: FunctionComponent<propTypes> = props => {
   const [localError, setLocalError] = useState<boolean>(false)
+
+  interface maskTypesProps {
+    [key: string]: string
+  }
+
+  const maskTypes: maskTypesProps = {
+    phone: "([000]) [000] [0000]",
+    identification: "[000]-[0000000]-[0]",
+    passport: "[00000000000]",
+    card: "[0000] [0000] [0000] [0000]",
+    rnc: "[0]-[00]-[00000]-[0]",
+    expiration: "[00]/[00]"
+  }
 
   //Misc
   const onBlur = () => {
@@ -57,14 +71,15 @@ const Input: FunctionComponent<propTypes> = props => {
           <CustomLoading size='small' />
         </CheckRender>
         <CheckRender allowed={!props.isLoading}>
-          <TextInput
+          <TextInputMask
             {...props}
-            placeholder=""
             onChangeText={onValueChange}
             placeholderTextColor={COLORS.grayPlaceholder}
             ref={props.setRef}
             style={[Styles.input, props.inputStyle]}
+            keyboardType='number-pad'
             onBlur={onBlur}
+            mask={maskTypes[props.mask || 'phone']}
           />
           <CheckRender allowed={props.label}>
             <Text style={Styles.label}>{props.label}</Text>
@@ -101,10 +116,11 @@ interface propTypes extends Omit<TextInputProps, 'onChangeText'> {
   widthSeparator?: number;
   label?: string;
   errorText?: string;
+  mask?: "phone" | "identification" | "passport" | "card" | "rnc" | "expiration",
   rightSection?: JSX.Element | JSX.Element[] | undefined;
 }
 
-Input.defaultProps = {
+InputMasked.defaultProps = {
   maxLength: 27,
   bottomSeparate: true,
   isLoading: false,
@@ -144,4 +160,4 @@ const Styles = StyleSheet.create({
   },
 });
 
-export default Input;
+export default InputMasked;

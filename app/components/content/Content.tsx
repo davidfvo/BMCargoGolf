@@ -13,9 +13,9 @@ const Content: FunctionComponent<propTypes> = props => {
       enableAutomaticScroll
       enableOnAndroid
       {...props}
+      contentContainerStyle={[Styles.content, props.contentContainerStyle]}
     >
       {props.children}
-      <Separator height={METRICS.xxLarge30} />
     </KeyboardAwareScrollView>
   );
 }
@@ -35,6 +35,9 @@ Content.defaultProps = {
 
 const Styles = StyleSheet.create({
   container: {
+    flexGrow: 1,
+  },
+  content: {
     flexGrow: 1,
   },
 })

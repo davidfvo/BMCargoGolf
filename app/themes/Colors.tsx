@@ -12,7 +12,7 @@ const COLORS = {
   black: '#242529',
   gray: "#848A94",
   grayPlaceholder: 'rgba(109, 101, 101,0.65)',
-  lightGray: "#F3F4F7",
+  lightGray: "#DCDCDC",
 
   //misc
   facebookBlue: "#3B5998",

@@ -2,17 +2,29 @@ import { useFocusEffect } from '@react-navigation/core';
 import { StackScreenProps } from '@react-navigation/stack';
 import update from 'immutability-helper';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { View } from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import { connect, ConnectedProps } from "react-redux";
+import ButtonText from '../../../components/button-text/ButtonText';
+import Button from '../../../components/button/Button';
 import Container from '../../../components/container/Container';
 import Content from '../../../components/content/Content';
 import Header from '../../../components/header/Header';
+import InputMasked from '../../../components/Input-masked/InputMasked';
+import Input from '../../../components/Input/Input';
+import Separator from '../../../components/separator/Separator';
+import Text from '../../../components/text/Text';
 import { RootState } from '../../../stores/AppReducers';
+import { COLORS, FONTS, METRICS } from '../../../themes';
 import { UserAccessNavigatorParamList } from '../../root/Navigators/UserAccessNavigator';
 import { SigninState } from './SigninConstants';
+import Styles from './SigninStyles';
 
 const Signin = (props: ScreenProps) => {
   const mounted = useRef(false);
-  const [state, setState] = useState<SigninState>({})
+  const [state, setState] = useState<SigninState>({
+    hidePassword: true,
+  })
 
   //Screen Initiators
   useFocusEffect(
@@ -40,19 +52,56 @@ const Signin = (props: ScreenProps) => {
   }, [])
 
   //Value change handlers
-  const onStateChange = (key: string, format?: (value: any) => string) => (value: any) => {
-    return setState(prevState => update(prevState, { [key]: { $set: format ? format(value) : value } }));
+  const onStateChange = (key: string, value: any) => {
+    return setState(prevState => update(prevState, { [key]: { $set: value } }));
   };
 
   //rendering
   return (
     <Container>
       <Header
-        title=""
         leftIcon
       />
-      <Content>
-
+      <Content
+        contentContainerStyle={Styles.content}
+        keyboardShouldPersistTaps='always'
+      >
+        <View style={Styles.formSection}>
+          <Text style={Styles.welcomeText}>Bienvenido!</Text>
+          <Separator height={METRICS.xxLarge30} />
+          <InputMasked
+            label="Número Documento"
+            mask='identification'
+          />
+          <Input
+            secureTextEntry={state.hidePassword}
+            rightSection={
+              <Ionicons
+                onPress={() => onStateChange("hidePassword", !state.hidePassword)}
+                name={state.hidePassword ? "eye" : "eye-off"}
+                size={FONTS.mediumIcon}
+                color={COLORS.secondary}
+              />
+            }
+          />
+          <ButtonText
+            onPress={() => { }}
+            title="Olvidé mi contraseña?"
+            theme="secondary"
+            containerStyle={Styles.forgottenButton}
+          />
+          <Button
+            onPress={() => { }}
+            title="Iniciar"
+            theme="secondary"
+          />
+        </View>
+        <Button
+          onPress={() => props.navigation.navigate("Signup", {})}
+          title="No tienes cuenta?"
+          theme="grayPlain"
+          containerStyle={Styles.signupButton}
+        />
       </Content>
     </Container>
   )

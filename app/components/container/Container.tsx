@@ -5,7 +5,7 @@ import { COLORS } from '../../themes';
 const Container: FunctionComponent<propTypes> = props => {
   return (
     <SafeAreaView {...props} style={[Styles.container, { backgroundColor: props.color }]}>
-      <StatusBar backgroundColor={props.barColor || COLORS.white} barStyle={props.barStyle} />
+      <StatusBar backgroundColor={props.barColor || COLORS.primary} barStyle={props.barStyle} />
       {props.children}
     </SafeAreaView>
   );
@@ -20,7 +20,7 @@ interface propTypes extends ViewProps {
 
 Container.defaultProps = {
   color: COLORS.white,
-  barStyle: 'dark-content',
+  barStyle: 'light-content',
 }
 
 const Styles = StyleSheet.create({

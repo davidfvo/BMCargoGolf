@@ -32,7 +32,7 @@ const Header: FunctionComponent<propTypes> = props => {
           hitSlop={hitslop}
         >
           <CheckRender allowed={props.leftIcon}>
-            <Ionicons name={props.iconName || "chevron-back"} size={FONTS.mediumIcon24} color={props.leftIconColor || COLORS.white} />
+            <Ionicons name={props.iconName || "chevron-back"} size={FONTS.mediumIcon} color={props.leftIconColor || COLORS.white} />
           </CheckRender>
         </TouchableOpacity>
       </View>

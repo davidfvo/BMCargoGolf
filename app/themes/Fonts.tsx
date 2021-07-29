@@ -10,7 +10,7 @@ const FONTS = {
   xLarge: moderateScale(22),
 
   smallIcon: horizontalScale(20),
-  mediumIcon24: horizontalScale(24),
+  mediumIcon: horizontalScale(24),
   largeIcon: horizontalScale(30),
 };
 

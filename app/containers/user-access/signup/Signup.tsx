@@ -2,21 +2,17 @@ import { useFocusEffect } from '@react-navigation/core';
 import { StackScreenProps } from '@react-navigation/stack';
 import update from 'immutability-helper';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Image, ImageBackground, Text, View } from 'react-native';
 import { connect, ConnectedProps } from "react-redux";
-import Images from '../../../assets';
-import Button from '../../../components/button/Button';
 import Container from '../../../components/container/Container';
 import Content from '../../../components/content/Content';
-import Separator from '../../../components/separator/Separator';
+import Header from '../../../components/header/Header';
 import { RootState } from '../../../stores/AppReducers';
 import { UserAccessNavigatorParamList } from '../../root/Navigators/UserAccessNavigator';
-import { WelcomeState } from './WelcomeConstants';
-import Styles from './WelcomeStyles';
+import { SignupState } from './SignupConstants';
 
-const Welcome = (props: ScreenProps) => {
+const Signup = (props: ScreenProps) => {
   const mounted = useRef(false);
-  const [state, setState] = useState<WelcomeState>({})
+  const [state, setState] = useState<SignupState>({})
 
   //Screen Initiators
   useFocusEffect(
@@ -51,41 +47,17 @@ const Welcome = (props: ScreenProps) => {
   //rendering
   return (
     <Container>
-      <ImageBackground
-        style={Styles.container}
-        resizeMode='cover'
-        source={Images.golf_course1}
-      >
-        <Content>
-          <Separator height={30} />
-          <View style={Styles.section}>
-            <Image
-              style={Styles.imageIcon}
-              resizeMode='cover'
-              source={Images.ic_launcher}
-            />
-            <Separator />
-            <Text style={Styles.welcomeText}>Bienvenido a Golfertek</Text>
-          </View>
-          <View style={Styles.section}>
-            <Button
-              onPress={() => props.navigation.navigate("Signup", {})}
-              title="Registrarme"
-              theme="secondary"
-            />
-            <Button
-              onPress={() => props.navigation.navigate("Signin", {})}
-              title="Iniciar sesión"
-              theme="plain"
-            />
-          </View>
-        </Content>
-      </ImageBackground>
+      <Header
+        leftIcon
+      />
+      <Content>
+
+      </Content>
     </Container>
   )
 }
 
-interface ScreenProps extends ReduxProps, StackScreenProps<UserAccessNavigatorParamList, 'Welcome'> {
+interface ScreenProps extends ReduxProps, StackScreenProps<UserAccessNavigatorParamList, 'Signup'> {
 
 }
 
@@ -100,4 +72,4 @@ const mapDispatchToProps = {
 const connector = connect(mapStateToProps, mapDispatchToProps)
 type ReduxProps = ConnectedProps<typeof connector>
 
-export default connector(Welcome)
+export default connector(Signup)
