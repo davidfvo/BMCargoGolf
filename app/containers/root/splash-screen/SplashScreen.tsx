@@ -5,24 +5,27 @@ import Content from '../../../components/content/Content';
 import { useFocusEffect } from '@react-navigation/core';
 import { isMountedRef, navigateAndReset } from "../../../services/NavigationService";
 import { COLORS, METRICS } from "../../../themes";
+import Container from "../../../components/container/Container";
 
 const SplashScreen = (props: any) => {
   useFocusEffect(
     useCallback(() => {
       RNSplashScreen.hide()
-      setTimeout(() => navigateAndReset('Example'), 1000)
+      setTimeout(() => navigateAndReset('UserAccessNavigator'), 1000)
       return () => { }
     }, [props.navigation, isMountedRef])
   )
 
   return (
-    <Content
-      color={COLORS.primary}
-      contentContainerStyle={Styles.content}
-    >
-      <View style={Styles.logoContainer}>
-      </View>
-    </Content>
+    <Container>
+      <Content
+        color={COLORS.primary}
+        contentContainerStyle={Styles.content}
+      >
+        <View style={Styles.logoContainer}>
+        </View>
+      </Content>
+    </Container>
   );
 }
 

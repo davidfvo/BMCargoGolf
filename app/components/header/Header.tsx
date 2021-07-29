@@ -26,7 +26,6 @@ const Header: FunctionComponent<propTypes> = props => {
 
   return (
     <View style={[Styles.header, props.containerStyle]}>
-      <StatusBar backgroundColor={COLORS.white} barStyle='light-content' />
       <View style={Styles.headerLeftView}>
         <TouchableOpacity
           onPress={onPressIcon}

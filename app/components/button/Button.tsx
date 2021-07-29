@@ -1,10 +1,12 @@
 import React, { FunctionComponent } from 'react';
-import { StyleProp, StyleSheet, TouchableOpacity, TouchableOpacityProps, View, ViewStyle, Text } from 'react-native';
-import { METRICS } from '../../themes';
+import { StyleProp, StyleSheet, TouchableOpacity, TouchableOpacityProps, View, ViewStyle } from 'react-native';
+import { COLORS, FONTS, METRICS } from '../../themes';
 import Colors from '../../themes/Colors';
 import Loading from '../loading/Loading';
 import Separator from '../separator/Separator';
 import CheckRender from '../security/CheckRender';
+import { horizontalScale, viewportWidth } from '../../utils/StyleHelpers';
+import Text from '../text/Text';
 
 const Button: FunctionComponent<propTypes> = (props) => {
   const localPress = () => {
@@ -17,12 +19,32 @@ const Button: FunctionComponent<propTypes> = (props) => {
     }
   }
 
-  const variableContentStyle = () => {
-    return {
+  interface themeProps {
+    [key: string]: any
+  }
+
+  const theme: themeProps = {
+    primary: {
+      backgroundColor: COLORS.primary,
+      loader: COLORS.white,
+      icon: COLORS.white,
+      shadowColor: COLORS.primary,
       marginHorizontal: props.widthSeparator,
-      height: props.buttonHeight,
-      borderRadius: props.buttonHeight && (props.buttonHeight / 2),
-    }
+    },
+    secondary: {
+      backgroundColor: COLORS.secondary,
+      loader: COLORS.white,
+      icon: COLORS.white,
+      shadowColor: COLORS.secondary,
+      marginHorizontal: props.widthSeparator,
+    },
+    plain: {
+      backgroundColor: 'transparent',
+      loader: COLORS.white,
+      icon: COLORS.white,
+      shadowColor: 'transparent',
+      marginHorizontal: props.widthSeparator,
+    },
   }
 
   return (
@@ -37,8 +59,7 @@ const Button: FunctionComponent<propTypes> = (props) => {
         <View
           style={[
             Styles.buttonContent,
-            { backgroundColor: props.color },
-            variableContentStyle(),
+            theme[props.theme || 'primary'],
             props.contentStyle,
           ]}>
           <CheckRender allowed={props.isLoading}>
@@ -71,11 +92,11 @@ interface propTypes {
   buttonHeight?: number;
   activeOpacity?: number;
   touchableProps?: TouchableOpacityProps;
-  color?: string;
   contentStyle?: StyleProp<ViewStyle>;
   containerStyle?: StyleProp<ViewStyle>;
   disabled?: boolean;
   bottomSeparate?: boolean;
+  theme?: "primary" | "secondary" | "plain";
   children?: JSX.Element | JSX.Element[] | undefined;
 }
 
@@ -83,27 +104,35 @@ Button.defaultProps = {
   isLoading: false,
   onPress: () => { },
   title: 'Crear o Consultar',
-  widthSeparator: 0,
+  widthSeparator: horizontalScale(METRICS.large15),
   buttonHeight: 64,
   activeOpacity: 0.2,
-  color: Colors.primary,
   children: undefined,
   bottomSeparate: true,
+  theme: 'primary'
 }
 
 const Styles = StyleSheet.create({
   buttonContainer: {
+    flexDirection: 'row',
     minHeight: 60,
   },
   buttonContent: {
     flex: 1,
     flexDirection: 'row',
     paddingHorizontal: METRICS.medium10,
+    backgroundColor: COLORS.primary,
     justifyContent: 'center',
     alignItems: 'center',
+    borderRadius: 5,
+    shadowOffset: {
+      width: 10,
+      height: 10,
+    },
   },
   title: {
     color: Colors.white,
+    fontSize: FONTS.regular,
   },
   loading: {
     padding: METRICS.small5,

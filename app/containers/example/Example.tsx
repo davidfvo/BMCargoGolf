@@ -11,7 +11,7 @@ import InputSearch from '../../components/input-search/InputSearch';
 import { ExampleRequest } from '../../services/example/ExampleServiceContants';
 import { RootState } from '../../stores/AppReducers';
 import ExampleActions from '../../stores/example/Actions';
-import { StackNavigatorParamList } from '../root/Navigators/MainStackNavigator';
+import { MainNavigatorParamList } from '../root/Navigators/MainNavigator';
 import { ExampleState } from './ExampleConstants';
 import Styles from './ExampleStyles';
 
@@ -70,7 +70,7 @@ const Example = (props: ScreenProps) => {
   )
 }
 
-interface ScreenProps extends ReduxProps, StackScreenProps<StackNavigatorParamList, 'Example'> {
+interface ScreenProps extends ReduxProps, StackScreenProps<MainNavigatorParamList, 'Example'> {
 
 }
 

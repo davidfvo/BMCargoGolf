@@ -1,6 +1,7 @@
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import React from "react";
 import DrawerMenu from '../drawer-menu/DrawerMenu';
+import { MainNavigatorParamList } from './MainNavigator';
 
 const Drawer = createDrawerNavigator<DrawerNavigatorParamList>();
 const DrawerNavigator = () => {
@@ -17,7 +18,7 @@ const DrawerNavigator = () => {
   );
 };
 
-export type DrawerNavigatorParamList = {
+export type DrawerNavigatorParamList = MainNavigatorParamList & {
   Dashboard?: any;
   Drawer?: any;
 }

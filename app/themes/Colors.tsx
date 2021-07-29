@@ -1,16 +1,18 @@
 const COLORS = {
   //bmCargo Colors
-  primary: "green",
-  secondary: "blue",
-  tertiary: "yellow",
+  primary: "#83A356",
+  secondary: "#037EF3",
+  tertiary: "#F4C716",
 
   //basics colors
   red: "red",
-  error: "#eb2929",
+  error: "#F74022",
+  success: "#30C39E",
   white: '#F8F9FB',
-  black: '#000000',
-  gray: "gray",
+  black: '#242529',
+  gray: "#848A94",
   grayPlaceholder: 'rgba(109, 101, 101,0.65)',
+  lightGray: "#F3F4F7",
 
   //misc
   facebookBlue: "#3B5998",

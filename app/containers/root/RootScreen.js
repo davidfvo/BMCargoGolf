@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { isMountedRef, navigationRef } from "../../services/NavigationService";
 import StartupActions from "../../stores/startup/Actions";
-import MainStackNavigator from "./Navigators/MainStackNavigator";
+import MainStackNavigator from "./Navigators/MainNavigator";
 
 const RootScreen = (props) => {
   const [initializing, setInitializing] = useState(true)

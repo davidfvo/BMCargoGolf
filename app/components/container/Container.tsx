@@ -20,7 +20,7 @@ interface propTypes extends ViewProps {
 
 Container.defaultProps = {
   color: COLORS.white,
-  barStyle: 'light-content',
+  barStyle: 'dark-content',
 }
 
 const Styles = StyleSheet.create({
