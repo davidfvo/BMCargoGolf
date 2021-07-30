@@ -1,13 +1,14 @@
 import React, { FunctionComponent, useState } from 'react';
 import { StyleProp, StyleSheet, TextInput, TextInputProps, TextStyle, View, ViewStyle } from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import { FONTS } from '../../themes';
 import COLORS from '../../themes/Colors';
 import METRICS from '../../themes/Metrics';
 import { horizontalScale, verticalScale } from '../../utils/StyleHelpers';
 import { isEmpty } from '../../utils/ValidationUtil';
-import CustomLoading from '../loading/Loading';
+import Loading from '../loading/Loading';
 import CheckRender from '../security/CheckRender';
-import CustomSeparator from '../separator/Separator';
+import Separator from '../separator/Separator';
 import Text from '../text/Text';
 
 const Input: FunctionComponent<propTypes> = props => {
@@ -43,6 +44,9 @@ const Input: FunctionComponent<propTypes> = props => {
     borderColor: (shouldShowError && COLORS.error) || COLORS.white,
     borderWidth: (shouldShowError && 1) || 0,
   }
+  const textColorStyle: StyleProp<TextStyle> = {
+    color: props.value ? COLORS.gray : COLORS.grayPlaceholder,
+  }
 
   //Rendering
   return (
@@ -54,12 +58,20 @@ const Input: FunctionComponent<propTypes> = props => {
         { marginHorizontal: props.widthSeparator },
       ]}>
         <CheckRender allowed={props.isLoading}>
-          <CustomLoading size='small' />
+          <Loading size='small' />
         </CheckRender>
         <CheckRender allowed={!props.isLoading}>
+          <CheckRender allowed={props.iconName}>
+            <View style={Styles.secondaryView}>
+              <Ionicons
+                name={props.iconName || "add"}
+                style={[Styles.icon, textColorStyle]}
+              />
+            </View>
+            <Separator width={METRICS.medium10} />
+          </CheckRender>
           <TextInput
             {...props}
-            placeholder=""
             onChangeText={onValueChange}
             placeholderTextColor={COLORS.grayPlaceholder}
             ref={props.setRef}
@@ -80,7 +92,7 @@ const Input: FunctionComponent<propTypes> = props => {
         </Text>
       </CheckRender>
       <CheckRender allowed={props.bottomSeparate}>
-        <CustomSeparator />
+        <Separator />
       </CheckRender>
     </>
   );
@@ -101,6 +113,7 @@ interface propTypes extends Omit<TextInputProps, 'onChangeText'> {
   widthSeparator?: number;
   label?: string;
   errorText?: string;
+  iconName?: string;
   rightSection?: JSX.Element | JSX.Element[] | undefined;
 }
 
@@ -117,7 +130,7 @@ Input.defaultProps = {
 
 const Styles = StyleSheet.create({
   container: {
-    paddingHorizontal: METRICS.medium10,
+    paddingHorizontal: horizontalScale(METRICS.medium10),
     backgroundColor: COLORS.lightGray,
     flexDirection: 'row',
     height: 60,
@@ -141,6 +154,14 @@ const Styles = StyleSheet.create({
     color: COLORS.error,
     fontSize: FONTS.word,
     marginTop: verticalScale(METRICS.medium10),
+  },
+
+  secondaryView: {
+    flex: 0,
+  },
+  icon: {
+    fontSize: FONTS.mediumIcon,
+    color: COLORS.gray,
   },
 });
 

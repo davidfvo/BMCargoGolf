@@ -1,10 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import { StyleProp, StyleSheet, Text, TextStyle, TouchableOpacity, TouchableOpacityProps, View } from 'react-native';
 import { IModalListInDto } from 'react-native-picker-modal-view/dist/Interfaces';
-import Octicons from 'react-native-vector-icons/Octicons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { FONTS, METRICS } from '../../themes';
 import COLORS from '../../themes/Colors';
-import CustomLoading from '../loading/Loading';
+import Loading from '../loading/Loading';
 import CheckRender from '../security/CheckRender';
+import Separator from '../separator/Separator';
 
 export const PickerButton: FunctionComponent<propTypes> = props => {
   const textColorStyle: StyleProp<TextStyle> = {
@@ -17,6 +19,15 @@ export const PickerButton: FunctionComponent<propTypes> = props => {
       style={Styles.container}
     >
       <CheckRender allowed={!props.isLoading}>
+        <CheckRender allowed={props.iconName}>
+          <View style={Styles.secondaryView}>
+            <Ionicons
+              name={props.iconName || "add"}
+              style={[Styles.icon, textColorStyle]}
+            />
+          </View>
+          <Separator width={METRICS.medium10} />
+        </CheckRender>
         <View style={Styles.primaryView}>
           <Text
             style={[Styles.title, textColorStyle]}
@@ -25,14 +36,14 @@ export const PickerButton: FunctionComponent<propTypes> = props => {
           </Text>
         </View>
         <View style={Styles.secondaryView}>
-          <Octicons
-            name="triangle-down"
+          <Ionicons
+            name="caret-down"
             style={[Styles.icon, textColorStyle]}
           />
         </View>
       </CheckRender>
       <CheckRender allowed={props.isLoading}>
-        <CustomLoading style={Styles.loading} color={props.color} />
+        <Loading style={Styles.loading} color={props.color} />
       </CheckRender>
     </TouchableOpacity>
   );
@@ -43,6 +54,7 @@ interface propTypes extends TouchableOpacityProps {
   placeholder?: string;
   value?: IModalListInDto;
   isLoading?: boolean;
+  iconName?: string;
 }
 
 PickerButton.defaultProps = {
@@ -59,7 +71,6 @@ const Styles = StyleSheet.create({
   title: {
     fontSize: 18,
     color: COLORS.gray,
-    paddingLeft: 0,
   },
   primaryView: {
     flex: 1,
@@ -68,7 +79,7 @@ const Styles = StyleSheet.create({
     flex: 0,
   },
   icon: {
-    fontSize: 22,
+    fontSize: FONTS.mediumIcon,
     color: COLORS.gray,
   },
   loading: {

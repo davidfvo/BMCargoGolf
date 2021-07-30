@@ -6,7 +6,7 @@ import { horizontalScale, verticalScale } from '../../utils/StyleHelpers';
 const Separator: FunctionComponent<propTypes> = props => {
   return (
     <View
-      style={{ height: verticalScale(props.height), backgroundColor: props.color, width: props.width }}
+      style={{ height: verticalScale(props.height), backgroundColor: props.color, width: horizontalScale(props.width) }}
     />
   )
 };
@@ -20,7 +20,7 @@ interface propTypes extends ViewProps {
 const defaultProps = {
   height: METRICS.xLarge20,
   color: 'transparent',
-  width: horizontalScale(METRICS.large15),
+  width: METRICS.large15,
 }
 
 Separator.defaultProps = defaultProps;

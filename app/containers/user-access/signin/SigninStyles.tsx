@@ -23,8 +23,7 @@ const Styles = StyleSheet.create({
     justifyContent: "flex-end"
   },
   signupButton: {
-    position: 'absolute',
-    bottom: 20,
+
   },
 });
 

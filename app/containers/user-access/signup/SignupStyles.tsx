@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
-import { COLORS, FONTS } from '../../../themes';
-import { moderateScale } from '../../../utils/StyleHelpers';
+import { COLORS, FONTS, METRICS } from '../../../themes';
+import { horizontalScale, moderateScale } from '../../../utils/StyleHelpers';
 
 const Styles = StyleSheet.create({
   container: {
@@ -30,13 +30,32 @@ const Styles = StyleSheet.create({
     borderColor: COLORS.lightGray,
     borderWidth: 1,
   },
+  photoIcon: {
+    position: 'absolute',
+    bottom: moderateScale(5),
+    right: moderateScale(5),
+  },
   photoText: {
     color: COLORS.secondary,
     fontSize: FONTS.small,
   },
+  firstTermsSentence: {
+    marginHorizontal: horizontalScale(METRICS.large15),
+    fontSize: FONTS.medium,
+    textAlign: "center",
+    color: COLORS.gray,
+  },
+
+  secondTermsSentence: {
+    marginHorizontal: horizontalScale(METRICS.large15),
+    fontSize: FONTS.medium,
+    textAlign: "center",
+    fontWeight: 'bold',
+    color: COLORS.secondary,
+  },
+
   signinButton: {
-    position: 'absolute',
-    bottom: 20,
+
   },
 });
 

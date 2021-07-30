@@ -92,7 +92,7 @@ const Styles = StyleSheet.create({
   },
   body: {
     flex: 1,
-    paddingLeft: METRICS.large15,
+    // paddingLeft: METRICS.large15,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -100,6 +100,7 @@ const Styles = StyleSheet.create({
     fontSize: FONTS.large,
     color: COLORS.white,
     fontWeight: 'bold',
+    textAlign: 'center',
   },
   headerRightView: {
     flex: 0,

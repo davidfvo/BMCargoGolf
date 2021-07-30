@@ -8,6 +8,7 @@ import { isEmpty } from '../../utils/ValidationUtil';
 import CustomSeparator from "../separator/Separator";
 import CheckRender from "../security/CheckRender";
 import { PickerButton } from "./PickerButton";
+import { horizontalScale } from "../../utils/StyleHelpers";
 
 const ModalPicker: FunctionComponent<propTypes> = props => {
   const [localError, setLocalError] = useState<boolean>(false)
@@ -56,6 +57,7 @@ const ModalPicker: FunctionComponent<propTypes> = props => {
         value={props.value}
         placeholder={props.placeholder}
         isLoading={props.isLoading}
+        iconName={props.iconName}
       />
     )
   }
@@ -66,6 +68,7 @@ const ModalPicker: FunctionComponent<propTypes> = props => {
         style={[
           Styles.container,
           errorStyle,
+          { marginHorizontal: props.widthSeparator },
         ]}
       >
         <PickerModal
@@ -98,6 +101,8 @@ interface propTypes {
   simpleError?: boolean;
   complexError?: (value?: IModalListInDto) => boolean;
   isLoading?: boolean;
+  widthSeparator?: number;
+  iconName?: string;
 }
 
 ModalPicker.defaultProps = {
@@ -112,15 +117,17 @@ ModalPicker.defaultProps = {
   simpleError: false,
   complexError: undefined,
   isLoading: false,
+  widthSeparator: horizontalScale(METRICS.large15),
 };
 
 const Styles = StyleSheet.create({
   container: {
-    paddingHorizontal: METRICS.medium10,
-    borderRadius: 20,
+    paddingHorizontal: horizontalScale(METRICS.medium10),
+    borderRadius: 5,
     height: 60,
     justifyContent: 'center',
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.lightGray,
+    flexDirection: 'row',
   },
 });
 

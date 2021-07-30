@@ -16,6 +16,7 @@ import Separator from '../../../components/separator/Separator';
 import Text from '../../../components/text/Text';
 import { RootState } from '../../../stores/AppReducers';
 import { COLORS, FONTS, METRICS } from '../../../themes';
+import { safeValExtraction } from '../../../utils/ObjectUtil';
 import { UserAccessNavigatorParamList } from '../../root/Navigators/UserAccessNavigator';
 import { SigninState } from './SigninConstants';
 import Styles from './SigninStyles';
@@ -24,6 +25,8 @@ const Signin = (props: ScreenProps) => {
   const mounted = useRef(false);
   const [state, setState] = useState<SigninState>({
     hidePassword: true,
+    docNumber: undefined,
+    password: undefined,
   })
 
   //Screen Initiators
@@ -52,8 +55,12 @@ const Signin = (props: ScreenProps) => {
   }, [])
 
   //Value change handlers
-  const onStateChange = (key: string, value: any) => {
+  const _onStateChange = (key: string, value: any) => {
     return setState(prevState => update(prevState, { [key]: { $set: value } }));
+  };
+
+  const onStateChange = (key: string, format?: (value: any) => string) => (value: any) => {
+    return setState(prevState => update(prevState, { [key]: { $set: format ? format(value) : value } }));
   };
 
   //rendering
@@ -73,12 +80,16 @@ const Signin = (props: ScreenProps) => {
           <InputMasked
             label="Número Documento"
             mask='identification'
+            value={state.docNumber}
+            onValueChange={onStateChange("docNumber")}
           />
           <Input
             secureTextEntry={state.hidePassword}
+            value={state.password}
+            onValueChange={onStateChange("password")}
             rightSection={
               <Ionicons
-                onPress={() => onStateChange("hidePassword", !state.hidePassword)}
+                onPress={() => _onStateChange("hidePassword", !state.hidePassword)}
                 name={state.hidePassword ? "eye" : "eye-off"}
                 size={FONTS.mediumIcon}
                 color={COLORS.secondary}

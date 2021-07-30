@@ -3,7 +3,7 @@ import { Text as RnText, TextProps, StyleProp, TextStyle } from 'react-native';
 import { COLORS, FONTS } from '../../themes';
 
 const Text: FunctionComponent<propTypes> = props => {
-  return <RnText style={[props.textStyle, props.style]} {...props}>{props.children}</RnText>;
+  return <RnText {...props} style={[props.textStyle, props.style]}>{props.children}</RnText>;
 };
 
 interface propTypes extends TextProps {
@@ -12,7 +12,7 @@ interface propTypes extends TextProps {
 }
 
 Text.defaultProps = {
-  textStyle: { 
+  style: { 
     color: COLORS.black,
     fontSize: FONTS.regular,
   },
