@@ -60,6 +60,7 @@ const Signin = (props: ScreenProps) => {
   return (
     <Container>
       <Header
+        title="Inicio de sesión"
         leftIcon
       />
       <Content

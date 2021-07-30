@@ -7,7 +7,7 @@ const Text: FunctionComponent<propTypes> = props => {
 };
 
 interface propTypes extends TextProps {
-  children: any,
+  children?: string,
   textStyle?: StyleProp<TextStyle>,
 }
 

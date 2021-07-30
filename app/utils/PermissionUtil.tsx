@@ -34,7 +34,7 @@ const requestAndroidPermission = async function (permission: any, title: string 
             },
           ]);
         return false;
-      }else if (permissionResponse !== PermissionsAndroid.RESULTS.GRANTED) {
+      } else if (permissionResponse !== PermissionsAndroid.RESULTS.GRANTED) {
         Alert.alert('Aviso', message);
         return false;
       } else {

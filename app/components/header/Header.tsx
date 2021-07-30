@@ -4,6 +4,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { goBack } from '../../services/NavigationService';
 import CheckRender from '../security/CheckRender';
 import { FONTS, METRICS, COLORS } from '../../themes';
+import { horizontalScale } from '../../utils/StyleHelpers';
 
 const Header: FunctionComponent<propTypes> = props => {
   const onPressIcon = () => {
@@ -43,13 +44,13 @@ const Header: FunctionComponent<propTypes> = props => {
           {props.title}
         </Text>
       </View>
-      <CheckRender allowed={props.rightIcon}>
-        <View style={Styles.headerRightView}>
+      <View style={Styles.headerRightView}>
+        <CheckRender allowed={props.rightIcon}>
           <TouchableOpacity onPress={onPressRightIcon}>
             {props.rightIcon}
           </TouchableOpacity>
-        </View>
-      </CheckRender>
+        </CheckRender>
+      </View>
     </View>
   );
 }
@@ -79,7 +80,7 @@ Header.defaultProps = {
 
 const Styles = StyleSheet.create({
   header: {
-    paddingHorizontal: METRICS.large15,
+    paddingHorizontal: horizontalScale(METRICS.medium10),
     height: 70,
     flexDirection: 'row',
     alignItems: 'center',
@@ -93,7 +94,7 @@ const Styles = StyleSheet.create({
     flex: 1,
     paddingLeft: METRICS.large15,
     justifyContent: 'center',
-    alignItems: 'flex-start',
+    alignItems: 'center',
   },
   headerTitleText: {
     fontSize: FONTS.large,
