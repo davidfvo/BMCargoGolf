@@ -176,7 +176,7 @@ const Signup = (props: ScreenProps) => {
           <Separator />
 
           <Button
-            onPress={() => { }}
+            onPress={() => props.navigation.navigate("SignupDone", {})}
             title="Registrarme"
             theme="secondary"
           />
